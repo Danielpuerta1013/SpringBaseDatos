@@ -15,15 +15,35 @@ public class DetalleServicio {
     @Autowired
     DetalleRepositorio detalleRepositorio;
 
-    public Detalle guardarDetalle(){
-        return null;
+    public Detalle guardarDetalle(Detalle datosDetalle)throws Exception{
+        try {
+            if (validacionDetalle.validarDetalle(datosDetalle)){
+                detalleRepositorio.save(datosDetalle);
+            }return null;
+        }catch (Exception error){
+            throw new Exception(error.getMessage());
+        }
+
     }
-    public Detalle consultarDetalleId(){
-        return null;
+    public Detalle consultarDetalleId(Integer idDetalle)throws Exception{
+        try{
+            if (detalleRepositorio.findById(idDetalle).isPresent()){
+                return detalleRepositorio.findById(idDetalle).get();
+
+            }else{
+                throw new Exception("detalle no encontrado por id ");
+            }
+        }catch (Exception error){
+            throw new Exception(error.getMessage());
+        }
     }
 
-    public List<Detalle> buscarTodosDetalle(){
-        return null;
+    public List<Detalle> buscarTodosDetalle()throws Exception{
+        try{
+            return detalleRepositorio.findAll();
+        }catch (Exception error){
+            throw new Exception(error.getMessage());
+        }
     }
     public Detalle editarDetalle(){
         return null;

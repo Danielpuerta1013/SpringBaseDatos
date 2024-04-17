@@ -23,16 +23,39 @@ public class UsuarioServicio {
     // metodo para guardar un usuario, metodo para consultar un usuario en bd por id , metodo para consultar todos los usuarios,
     // metodo para editar un usuario, metodo para eliminar un usuario.
 
-    public Usuario guardarUsuario(){
-        return null;
+    public Usuario guardarUsuario(Usuario datosUsuario) throws Exception{
+        try {
+            if (validacionUsuario.validarUsuario(datosUsuario)) { // si pasa las validaciones lo guarda
+                return usuarioRepositorio.save(datosUsuario);
+            }
+            return null; // Mover el retorno dentro del bloque if
+        } catch (Exception error) {
+            throw new Exception(error.getMessage());
+        }
+
     }
-    public Usuario consultarUsuarioId(){
-        return null;
+    public Usuario consultarUsuarioId(Integer idUsuario)throws Exception{
+        try{
+            if (usuarioRepositorio.findById(idUsuario).isPresent()){
+                return usuarioRepositorio.findById(idUsuario).get();
+
+            }else{
+                throw new Exception("usuario no encontrado");
+            }
+        }catch (Exception error){
+            throw new Exception(error.getMessage());
+        }
+
     }
 
-    public List<Usuario> buscarTodosUsuarios(){
-        return null;
+    public List<Usuario> buscarTodosUsuarios()throws Exception{
+        try{
+            return usuarioRepositorio.findAll();
+        }catch (Exception error){
+            throw new Exception(error.getMessage());
+        }
     }
+
     public Usuario editarUsuario(){
         return null;
     }

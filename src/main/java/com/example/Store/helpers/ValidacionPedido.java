@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class ValidacionPedido {
-    public boolean validarFechaYHora(LocalDate fechaYHora)throws Exception{
+    public static boolean validarFechaYHora(LocalDate fechaYHora)throws Exception{
         if (fechaYHora==null){
             throw new Exception("la fecha no puede estar vacia");
         }

@@ -1,7 +1,9 @@
 package com.example.Store.helpers;
 
+import com.example.Store.modelos.Usuario;
+
 public class ValidacionUsuario {
-    public boolean validarNombres(String nombres)throws Exception{
+    public static boolean validarNombres(String nombres)throws Exception{
         if (nombres.length()==0){
             throw new Exception("El nombre no puede estar vacio");
         }
@@ -15,7 +17,7 @@ public class ValidacionUsuario {
         }
         return true;
     }
-    public boolean validarCedula(String cedula)throws Exception{
+    public static boolean validarCedula(String cedula)throws Exception{
         if (cedula.length()==0){
             throw new Exception("la longitud de la cedula no puede ser cero");
         }
@@ -28,7 +30,7 @@ public class ValidacionUsuario {
         }
         return true;
     }
-    public boolean validarCorreo(String correo)throws Exception{
+    public static boolean validarCorreo(String correo)throws Exception{
         String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
         if (!ValidarPatron.evaluarPatron(correo,regex)){
             throw new Exception("correo no cumple con el formato adecuado");
@@ -39,7 +41,7 @@ public class ValidacionUsuario {
 
         return true;
     }
-    public boolean validarSexo(String sexo)throws Exception{
+    public static boolean validarSexo(String sexo)throws Exception{
         if (sexo.length()==0){
             throw new Exception("la longitud del sexo no puede ser cero");
         }
@@ -51,7 +53,7 @@ public class ValidacionUsuario {
         }
         return true;
     }
-    public boolean codigoPostal(String codigoPostal)throws Exception{
+    public static boolean codigoPostal(String codigoPostal)throws Exception{
         if (codigoPostal.length()==0){
             throw new Exception("la longitud del codigo postal no puede ser cero");
         }
@@ -63,6 +65,13 @@ public class ValidacionUsuario {
             throw new Exception("El codigo postal ingresado solo puede tener numeros");
         }
         return true;
+    }
+    public static boolean validarUsuario(Usuario usuario) throws Exception {
+        return validarNombres(usuario.getNombres()) &&
+                validarCedula(usuario.getCedula()) &&
+                validarCorreo(usuario.getCorreo()) &&
+                validarSexo(usuario.getSexo()) &&
+                codigoPostal(usuario.getCodigoPostal());
     }
 
 

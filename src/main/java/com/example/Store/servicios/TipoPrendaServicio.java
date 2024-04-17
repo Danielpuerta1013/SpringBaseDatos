@@ -16,15 +16,34 @@ public class TipoPrendaServicio {
     @Autowired
     TipoPrendaRepositorio tipoPrendaRepositorio;
 
-    public TipoPrenda guardarTipoPrenda(){
-        return null;
+    public TipoPrenda guardarTipoPrenda(TipoPrenda datosTipoPrenda)throws Exception{
+        try{
+            if (validacionTipoPrenda.validarNombre(datosTipoPrenda.getNombre())){
+                return tipoPrendaRepositorio.save(datosTipoPrenda);
+
+            }return null;
+        }catch (Exception error){
+            throw new Exception(error.getMessage());
+        }
     }
-    public TipoPrenda consultarTipoPrendaId(){
-        return null;
+    public TipoPrenda consultarTipoPrendaId(Integer idTipoPrenda)throws Exception{
+       try{
+           if (tipoPrendaRepositorio.findById(idTipoPrenda).isPresent()){
+               return tipoPrendaRepositorio.findById(idTipoPrenda).get();
+           }else{
+               throw new Exception("Tipo prenda no encontrado");
+           }
+       }catch (Exception error){
+           throw new Exception(error.getMessage());
+       }
     }
 
-    public List<TipoPrenda> buscarTodosTipoPrenda(){
-        return null;
+    public List<TipoPrenda> buscarTodosTipoPrenda()throws Exception{
+        try{
+            return tipoPrendaRepositorio.findAll();
+        }catch (Exception error){
+            throw new Exception(error.getMessage());
+        }
     }
     public TipoPrenda editarTipoPrenda(){
         return null;

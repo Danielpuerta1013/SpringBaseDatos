@@ -1,7 +1,7 @@
 package com.example.Store.helpers;
 
 public class ValidacionTipoPrenda {
-    public boolean validarNombre(String nombre)throws Exception{
+    public static boolean validarNombre(String nombre)throws Exception{
         if (nombre.length()==0){
             throw new Exception("el tipo de prenda no puede estar vacio");
         }

@@ -1,9 +1,11 @@
 package com.example.Store.helpers;
 
+import com.example.Store.modelos.Marca;
+
 import java.time.LocalDate;
 
 public class ValidacionMarca {
-    public boolean validarNombreMarca(String nombreMarca)throws Exception{
+    public static boolean validarNombreMarca(String nombreMarca)throws Exception{
         // evaluo si el nombre coincide con la expresion
 
         if (nombreMarca.length()>50){
@@ -17,7 +19,7 @@ public class ValidacionMarca {
         return true;
     }
 
-    public boolean validarNit(String nit)throws Exception{
+    public static boolean validarNit(String nit)throws Exception{
         String regex = "^[0-9]+$";
         if (!ValidarPatron.evaluarPatron(regex,nit)){
             throw new Exception("El nit ingresado solo puede tener numeros");
@@ -32,11 +34,15 @@ public class ValidacionMarca {
         return true;
     }
 
-    public boolean validarAno(LocalDate ano)throws Exception{
+    public static boolean validarAno(LocalDate ano)throws Exception{
         if (ano==null){
             throw new Exception("la fecha no puede estar vacia");
         }
 
         return true;
+    }
+    public static boolean validarMarca(Marca marca)throws Exception{
+        return validarNombreMarca(marca.getNombreMarca())&&validarAno(marca.getAnoCreacion())&&
+                validarNit(marca.getNit());
     }
 }

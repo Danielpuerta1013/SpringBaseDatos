@@ -1,7 +1,9 @@
 package com.example.Store.helpers;
 
+import com.example.Store.modelos.Detalle;
+
 public class ValidacionDetalle {
-    public boolean validarCostoTotal(Integer costoTotal)throws Exception{
+    public static boolean validarCostoTotal(Integer costoTotal)throws Exception{
         if (costoTotal<0){
             throw new Exception("el costo total solo puede ser positivo");
         }
@@ -20,7 +22,7 @@ public class ValidacionDetalle {
         }
         return true;
     }
-    public boolean validarCantidadProductos(Integer cantidadProductos)throws Exception{
+    public static boolean validarCantidadProductos(Integer cantidadProductos)throws Exception{
         if (cantidadProductos<0){
             throw new Exception("el numero solo puede ser positivo");
         }
@@ -33,6 +35,9 @@ public class ValidacionDetalle {
         }
 
         return true;
+    }
+    public static boolean validarDetalle(Detalle detalle)throws Exception{
+        return validarCantidadProductos(detalle.getCantidadProductos())&&validarCostoTotal(detalle.getCostoTotal());
     }
 
 }
