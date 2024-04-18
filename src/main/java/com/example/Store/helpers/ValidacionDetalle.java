@@ -1,7 +1,9 @@
 package com.example.Store.helpers;
 
 import com.example.Store.modelos.Detalle;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ValidacionDetalle {
     public static boolean validarCostoTotal(Integer costoTotal)throws Exception{
         if (costoTotal<0){

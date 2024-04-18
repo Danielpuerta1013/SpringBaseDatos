@@ -1,9 +1,11 @@
 package com.example.Store.helpers;
 
 import com.example.Store.modelos.Marca;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
+@Component
 public class ValidacionMarca {
     public static boolean validarNombreMarca(String nombreMarca)throws Exception{
         // evaluo si el nombre coincide con la expresion

@@ -1,7 +1,9 @@
 package com.example.Store.helpers;
 
 import com.example.Store.modelos.Producto;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ValidacionProducto {
     public static boolean validarNombre(String nombre)throws Exception{
         if (nombre.length()==0){
@@ -10,10 +12,10 @@ public class ValidacionProducto {
         if (nombre.length()>60){
             throw new Exception("El nombre no puede tener mas de 60 caracteres");
         }
-        String regex="^[a-zA-Z ]+$";
-        // evaluo si el nombre coincide con la expresion
-        if (!ValidarPatron.evaluarPatron(nombre,regex)){
-            throw new Exception("revisa el nombre ingresado ya que solo puede tener letras y espacios");
+        String regex = "^[a-zA-Z\\s]+$"; // Cambiado para permitir solo letras y espacios
+        // Evaluamos si el nombre coincide con la expresión regular
+        if (!nombre.matches(regex)) {
+            throw new IllegalArgumentException("Revisa el nombre ingresado, solo puede contener letras y espacios");
         }
         return true;
     }

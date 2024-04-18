@@ -1,7 +1,10 @@
 package com.example.Store.helpers;
 
 import com.example.Store.modelos.Usuario;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ValidacionUsuario {
     public static boolean validarNombres(String nombres)throws Exception{
         if (nombres.length()==0){
@@ -10,10 +13,10 @@ public class ValidacionUsuario {
         if (nombres.length()>50){
             throw new Exception("El nombre no puede tener mas de 50 caracteres");
         }
-        String regex="^[a-zA-Z ]+$";
+        String regex="^[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+$";
         // evaluo si el nombre coincide con la expresion
-        if (!ValidarPatron.evaluarPatron(nombres,regex)){
-            throw new Exception("revisa el nombre ingresado ya que solo puede tener letras y espacios");
+        if (!nombres.matches("[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+")) {
+            throw new IllegalArgumentException("Revisa el nombre ingresado ya que solo puede contener letras y espacios");
         }
         return true;
     }
@@ -32,8 +35,8 @@ public class ValidacionUsuario {
     }
     public static boolean validarCorreo(String correo)throws Exception{
         String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-        if (!ValidarPatron.evaluarPatron(correo,regex)){
-            throw new Exception("correo no cumple con el formato adecuado");
+        if (!correo.trim().matches(regex)) {
+            throw new IllegalArgumentException("El formato del correo electrónico no es válido");
         }
         if (correo.length()==0){
             throw new Exception("la longitud del correo no puede ser cero");
@@ -42,19 +45,16 @@ public class ValidacionUsuario {
         return true;
     }
     public static boolean validarSexo(String sexo)throws Exception{
-        if (sexo.length()==0){
-            throw new Exception("la longitud del sexo no puede ser cero");
+        if (sexo == null || sexo.trim().isEmpty()) {
+            throw new IllegalArgumentException("El sexo no puede estar vacío");
         }
-        if (sexo.length()>1){
-            throw new Exception("la longitud del sexo no puede ser mayor a 1");
-        }
-        if (!sexo.toLowerCase().equals("m") || !sexo.toLowerCase().equals("f")){
-            throw new Exception("el valor del sexo solo puede ser m o f");
+        if (sexo.length() != 1 || (!sexo.equalsIgnoreCase("m") && !sexo.equalsIgnoreCase("f"))) {
+            throw new IllegalArgumentException("El valor del sexo solo puede ser 'm' o 'f'");
         }
         return true;
     }
     public static boolean codigoPostal(String codigoPostal)throws Exception{
-        if (codigoPostal.length()==0){
+        if (codigoPostal.isEmpty()){
             throw new Exception("la longitud del codigo postal no puede ser cero");
         }
         if (codigoPostal.length()>6){
