@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.NoSuchElementException;
+
 @RestController
 @RequestMapping("storeapi/v1/usuario")
 
@@ -28,6 +30,19 @@ public class UsuarioControlador {
                     .body(error.getMessage());
         }
 
+    }
+    @GetMapping("{id}")
+    public ResponseEntity<?> consultarUsuarioPorId(@PathVariable Integer id) {
+        try {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(usuarioServicio.consultarUsuarioId(id));
+
+        } catch (Exception error) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(error.getMessage());
+        }
     }
 
 
