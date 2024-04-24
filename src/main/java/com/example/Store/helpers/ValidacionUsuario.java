@@ -29,7 +29,7 @@ public class ValidacionUsuario {
         }
         String regex = "^[0-9]+$";
         if (!ValidarPatron.evaluarPatron(regex,cedula)){
-            throw new Exception("El nit ingresado solo puede tener numeros");
+            throw new Exception("La cedula ingresada solo puede tener numeros");
         }
         return true;
     }

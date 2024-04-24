@@ -18,7 +18,7 @@ public class DetalleServicio {
     public Detalle guardarDetalle(Detalle datosDetalle)throws Exception{
         try {
             if (validacionDetalle.validarDetalle(datosDetalle)){
-                detalleRepositorio.save(datosDetalle);
+                return detalleRepositorio.save(datosDetalle);
             }return null;
         }catch (Exception error){
             throw new Exception(error.getMessage());
