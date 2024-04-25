@@ -7,6 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("storeapi/v1/detalle")
 public class DetalleControlador {
@@ -20,9 +24,12 @@ public class DetalleControlador {
                     .status(HttpStatus.OK)
                     .body(detalleServicio.guardarDetalle(datosDetalle));
         }catch(Exception error){
+            Map<String, Object> errorDetails=new LinkedHashMap<>();
+            errorDetails.put("timestamp", LocalDateTime.now());
+            errorDetails.put("message",error.getMessage());
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body(error.getMessage());
+                    .body(errorDetails);
         }
 
     }
@@ -35,9 +42,30 @@ public class DetalleControlador {
                     .body(detalleServicio.consultarDetalleId(id));
 
         } catch (Exception error) {
+            Map<String, Object> errorDetails=new LinkedHashMap<>();
+            errorDetails.put("timestamp", LocalDateTime.now());
+            errorDetails.put("message",error.getMessage());
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body(error.getMessage());
+                    .body(errorDetails);
         }
+    }
+
+    @GetMapping
+    public ResponseEntity<?> consultarDetalles(){
+        try{
+            return ResponseEntity
+                    .status(HttpStatus.FOUND)
+                    .body(detalleServicio.buscarTodosDetalle());
+
+        }catch (Exception error){
+            Map<String, Object> errorDetails=new LinkedHashMap<>();
+            errorDetails.put("timestamp", LocalDateTime.now());
+            errorDetails.put("message",error.getMessage());
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(errorDetails);
+        }
+
     }
 }

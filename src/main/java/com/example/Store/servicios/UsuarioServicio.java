@@ -59,8 +59,19 @@ public class UsuarioServicio {
     public Usuario editarUsuario(){
         return null;
     }
-    public boolean eliminarUsuario(){
-        return true;
+    public boolean eliminarUsuario(Integer idUsuario)throws Exception{
+        try{
+            if (usuarioRepositorio.findById(idUsuario).isPresent()){
+                usuarioRepositorio.deleteById(idUsuario);
+                return true;
+            }else {
+                throw new Exception("usuario no encontrado");
+            }
+
+        }catch (Exception error){
+            throw new Exception(error.getMessage());
+        }
+
     }
 
 }

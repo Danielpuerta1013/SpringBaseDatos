@@ -7,6 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("storeapi/v1/producto")
 public class ProductoControlador {
@@ -20,9 +24,12 @@ public class ProductoControlador {
                     .status(HttpStatus.OK)
                     .body(productoServicio.guardarProducto(datosProducto));
         }catch(Exception error){
+            Map<String, Object> errorDetails=new LinkedHashMap<>();
+            errorDetails.put("timestamp", LocalDateTime.now());
+            errorDetails.put("message",error.getMessage());
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body(error.getMessage());
+                    .body(errorDetails);
         }
 
     }
@@ -35,9 +42,30 @@ public class ProductoControlador {
                     .body(productoServicio.consultarProductoId(id));
 
         } catch (Exception error) {
+            Map<String, Object> errorDetails=new LinkedHashMap<>();
+            errorDetails.put("timestamp", LocalDateTime.now());
+            errorDetails.put("message",error.getMessage());
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body(error.getMessage());
+                    .body(errorDetails);
         }
+    }
+
+    @GetMapping
+    public ResponseEntity<?> consultarProductos(){
+        try{
+            return ResponseEntity
+                    .status(HttpStatus.FOUND)
+                    .body(productoServicio.buscarTodosProducto());
+
+        }catch (Exception error){
+            Map<String, Object> errorDetails=new LinkedHashMap<>();
+            errorDetails.put("timestamp", LocalDateTime.now());
+            errorDetails.put("message",error.getMessage());
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(errorDetails);
+        }
+
     }
 }

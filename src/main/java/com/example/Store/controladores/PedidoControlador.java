@@ -8,6 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("storeapi/v1/pedido")
 public class PedidoControlador {
@@ -17,13 +21,17 @@ public class PedidoControlador {
     @PostMapping
     public ResponseEntity<?> guardarPedido(@RequestBody Pedido datosPedido){
         try{
+
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .body(pedidoServicio.guardarPedido(datosPedido));
         }catch(Exception error){
+            Map<String, Object> errorDetails=new LinkedHashMap<>();
+            errorDetails.put("timestamp", LocalDateTime.now());
+            errorDetails.put("message",error.getMessage());
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body(error.getMessage());
+                    .body(errorDetails);
         }
 
     }
@@ -36,9 +44,30 @@ public class PedidoControlador {
                     .body(pedidoServicio.consultarPedidoId(id));
 
         } catch (Exception error) {
+            Map<String, Object> errorDetails=new LinkedHashMap<>();
+            errorDetails.put("timestamp", LocalDateTime.now());
+            errorDetails.put("message",error.getMessage());
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body(error.getMessage());
+                    .body(errorDetails);
         }
+    }
+
+    @GetMapping
+    public ResponseEntity<?> consultarPedidos(){
+        try{
+            return ResponseEntity
+                    .status(HttpStatus.FOUND)
+                    .body(pedidoServicio.buscarTodosPedido());
+
+        }catch (Exception error){
+            Map<String, Object> errorDetails=new LinkedHashMap<>();
+            errorDetails.put("timestamp", LocalDateTime.now());
+            errorDetails.put("message",error.getMessage());
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(errorDetails);
+        }
+
     }
 }

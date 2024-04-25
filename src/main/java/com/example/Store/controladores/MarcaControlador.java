@@ -7,6 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("storeapi/v1/marca")
 public class MarcaControlador {
@@ -20,9 +24,12 @@ public class MarcaControlador {
                     .status(HttpStatus.OK)
                     .body(marcaServicio.guardarMarca(datosMarca));
         }catch(Exception error){
+            Map<String, Object> errorDetails=new LinkedHashMap<>();
+            errorDetails.put("timestamp", LocalDateTime.now());
+            errorDetails.put("message",error.getMessage());
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body(error.getMessage());
+                    .body(errorDetails);
         }
 
     }
@@ -35,9 +42,30 @@ public class MarcaControlador {
                     .body(marcaServicio.consultarMarcaId(id));
 
         } catch (Exception error) {
+            Map<String, Object> errorDetails=new LinkedHashMap<>();
+            errorDetails.put("timestamp", LocalDateTime.now());
+            errorDetails.put("message",error.getMessage());
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body(error.getMessage());
+                    .body(errorDetails);
         }
+    }
+
+    @GetMapping
+    public ResponseEntity<?> consultarMarcas(){
+        try{
+            return ResponseEntity
+                    .status(HttpStatus.FOUND)
+                    .body(marcaServicio.buscarTodosMarca());
+
+        }catch (Exception error){
+            Map<String, Object> errorDetails=new LinkedHashMap<>();
+            errorDetails.put("timestamp", LocalDateTime.now());
+            errorDetails.put("message",error.getMessage());
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(errorDetails);
+        }
+
     }
 }

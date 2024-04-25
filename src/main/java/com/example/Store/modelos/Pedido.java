@@ -20,12 +20,21 @@ public class Pedido {
     @JoinColumn(name="id_usuario", referencedColumnName = "id_usuario")
     Usuario usuario;
 
+    public Pedido(Integer id_pedido, LocalDate fechaYHora, Usuario usuario) {
+        this.id_pedido = id_pedido;
+        this.fechaYHora = fechaYHora;
+        this.usuario = usuario;
+    }
+
     public Pedido() {
     }
 
-    public Pedido(Integer id, LocalDateTime fechaYHora) {
-        this.id_pedido = id;
-        fechaYHora = fechaYHora;
+    public Integer getId_pedido() {
+        return id_pedido;
+    }
+
+    public void setId_pedido(Integer id_pedido) {
+        this.id_pedido = id_pedido;
     }
 
     public LocalDate getFechaYHora() {
@@ -34,5 +43,13 @@ public class Pedido {
 
     public void setFechaYHora(LocalDate fechaYHora) {
         this.fechaYHora = fechaYHora;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

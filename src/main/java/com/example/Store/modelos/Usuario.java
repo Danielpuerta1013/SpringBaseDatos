@@ -32,6 +32,8 @@ public class Usuario {
     @Column(name = "codigoPostal",nullable = true, length = 50)
     private String codigoPostal;// no vacio- solo numeros - longitud 6
 
+
+
     ////////////// creando relaciones
 
     //Pedido pedido;
@@ -52,6 +54,14 @@ public class Usuario {
         this.departamento = departamento;
         this.municipio = municipio;
         this.codigoPostal = codigoPostal;
+    }
+
+    public Integer getId_usuario() {
+        return id_usuario;
+    }
+
+    public void setId_usuario(Integer id_usuario) {
+        this.id_usuario = id_usuario;
     }
 
     public String getNombres() {

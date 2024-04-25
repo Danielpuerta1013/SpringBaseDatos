@@ -7,7 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("storeapi/v1/usuario")
@@ -25,9 +29,12 @@ public class UsuarioControlador {
                     .status(HttpStatus.OK)
                     .body(usuarioServicio.guardarUsuario(datosUsuario));
         }catch(Exception error){
+            Map<String, Object> errorDetails=new LinkedHashMap<>();
+            errorDetails.put("timestamp", LocalDateTime.now());
+            errorDetails.put("message",error.getMessage());
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body(error.getMessage());
+                    .body(errorDetails);
         }
 
     }
@@ -38,12 +45,35 @@ public class UsuarioControlador {
                     .status(HttpStatus.OK)
                     .body(usuarioServicio.consultarUsuarioId(id));
 
-        } catch (Exception error) {
+        }catch (Exception error){
+            Map<String, Object> errorDetails=new LinkedHashMap<>();
+            errorDetails.put("timestamp", LocalDateTime.now());
+            errorDetails.put("message",error.getMessage());
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body(error.getMessage());
+                    .body(errorDetails);
         }
     }
+
+    @GetMapping
+    public ResponseEntity<?> consultarUsuarios(){
+        try{
+            return ResponseEntity
+                    .status(HttpStatus.FOUND)
+                    .body(usuarioServicio.buscarTodosUsuarios());
+
+        }catch (Exception error){
+            Map<String, Object> errorDetails=new LinkedHashMap<>();
+            errorDetails.put("timestamp", LocalDateTime.now());
+            errorDetails.put("message",error.getMessage());
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(errorDetails);
+        }
+
+    }
+
+
 
 
 
