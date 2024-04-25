@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioServicio {
@@ -61,7 +62,8 @@ public class UsuarioServicio {
     }
     public boolean eliminarUsuario(Integer idUsuario)throws Exception{
         try{
-            if (usuarioRepositorio.findById(idUsuario).isPresent()){
+            Optional<Usuario> usuarioOptional = usuarioRepositorio.findById(idUsuario);
+            if (usuarioOptional.isPresent()) {
                 usuarioRepositorio.deleteById(idUsuario);
                 return true;
             }else {
