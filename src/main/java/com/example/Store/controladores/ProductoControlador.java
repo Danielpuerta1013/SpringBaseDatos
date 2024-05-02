@@ -55,7 +55,7 @@ public class ProductoControlador {
     public ResponseEntity<?> consultarProductos(){
         try{
             return ResponseEntity
-                    .status(HttpStatus.FOUND)
+                    .status(HttpStatus.OK)
                     .body(productoServicio.buscarTodosProducto());
 
         }catch (Exception error){

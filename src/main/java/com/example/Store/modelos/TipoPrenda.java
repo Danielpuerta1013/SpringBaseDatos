@@ -19,6 +19,14 @@ public class TipoPrenda {
         this.nombre = nombre;
     }
 
+    public Integer getId_tipoPrenda() {
+        return id_tipoPrenda;
+    }
+
+    public void setId_tipoPrenda(Integer id_tipoPrenda) {
+        this.id_tipoPrenda = id_tipoPrenda;
+    }
+
     public String getNombre() {
         return nombre;
     }

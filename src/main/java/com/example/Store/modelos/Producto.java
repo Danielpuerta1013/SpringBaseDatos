@@ -53,6 +53,14 @@ public class Producto {
         this.fotografia = fotografia;
     }
 
+    public Integer getId_producto() {
+        return id_producto;
+    }
+
+    public void setId_producto(Integer id_producto) {
+        this.id_producto = id_producto;
+    }
+
     public String getNombreProducto() {
         return nombreProducto;
     }

@@ -22,6 +22,14 @@ public class Detalle {
         this.cantidadProductos = cantidadProductos;
     }
 
+    public Integer getId_detalle() {
+        return id_detalle;
+    }
+
+    public void setId_detalle(Integer id_detalle) {
+        this.id_detalle = id_detalle;
+    }
+
     public Integer getCostoTotal() {
         return costoTotal;
     }

@@ -32,6 +32,14 @@ public class Marca {
         this.sedePrincipal = sedePrincipal;
     }
 
+    public Integer getId_marca() {
+        return id_marca;
+    }
+
+    public void setId_marca(Integer id_marca) {
+        this.id_marca = id_marca;
+    }
+
     public String getNombreMarca() {
         return nombreMarca;
     }
