@@ -1,5 +1,6 @@
 package com.example.Store.modelos;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -27,11 +28,13 @@ public class Producto {
 
     @ManyToOne
     @JoinColumn(name = "id_detalle",referencedColumnName = "id_detalle")
+    @JsonBackReference
     Detalle detalle;
 
 
     @ManyToOne
     @JoinColumn(name = "id_marca",referencedColumnName = "id_marca")
+            @JsonBackReference
     Marca marca;
 
     @ManyToOne

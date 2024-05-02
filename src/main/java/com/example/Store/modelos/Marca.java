@@ -1,9 +1,12 @@
 package com.example.Store.modelos;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.awt.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "marcas")
@@ -20,6 +23,10 @@ public class Marca {
     private LocalDate anoCreacion;// obligario
     @Column(name = "sedePrincipal",nullable = true, length = 30)
     private String sedePrincipal; // no se valida
+
+    @OneToMany(mappedBy = "marca")
+    @JsonManagedReference
+    private List<Producto> productos=new ArrayList<Producto>();
 
     public Marca() {
     }
