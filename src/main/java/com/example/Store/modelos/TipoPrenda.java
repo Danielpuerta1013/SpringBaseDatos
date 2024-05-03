@@ -1,6 +1,10 @@
 package com.example.Store.modelos;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tipoPrenda")
@@ -10,6 +14,10 @@ public class TipoPrenda {
     private Integer id_tipoPrenda;
     @Column(name = "nombre",nullable = false, length = 80)
     private String nombre; // no vacio solo letras y espacios y longitud 80
+
+    @OneToMany(mappedBy = "tipoPrenda")
+    @JsonManagedReference
+    private List<Producto> productos=new ArrayList<Producto>();
 
     public TipoPrenda() {
     }
