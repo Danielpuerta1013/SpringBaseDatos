@@ -19,6 +19,7 @@ public class TipoPrenda {
     @JsonManagedReference
     private List<Producto> productos=new ArrayList<>();
 
+
     public TipoPrenda() {
     }
 
