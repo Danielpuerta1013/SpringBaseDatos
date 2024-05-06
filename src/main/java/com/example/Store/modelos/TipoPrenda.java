@@ -17,7 +17,8 @@ public class TipoPrenda {
 
     @OneToMany(mappedBy = "tipoPrenda")
     @JsonManagedReference
-    private List<Producto> productos=new ArrayList<Producto>();
+    private List<Producto> productos=new ArrayList<>();
+
 
     public TipoPrenda() {
     }

@@ -41,3 +41,17 @@
 "costoTotal": 320000,
 "cantidadProductos": 144
 }
+
+
+@JsonBackReference en producto a cada columna relacionada
+
+@OneToMany(mappedBy = "marca")
+@JsonManagedReference
+private List<Producto> productos=new ArrayList<Producto>();
+
+en marca
+
+
+@OneToMany(mappedBy = "tipoPrenda")
+@JsonManagedReference
+private List<Producto> productos=new ArrayList<>();
