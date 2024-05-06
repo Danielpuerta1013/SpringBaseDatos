@@ -59,7 +59,7 @@ public class UsuarioControlador {
     public ResponseEntity<?> consultarUsuarios(){
         try{
             return ResponseEntity
-                    .status(HttpStatus.FOUND)
+                    .status(HttpStatus.OK)
                     .body(usuarioServicio.buscarTodosUsuarios());
 
         }catch (Exception error){

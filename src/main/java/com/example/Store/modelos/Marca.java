@@ -28,6 +28,7 @@ public class Marca {
     @JsonManagedReference
     private List<Producto> productos=new ArrayList<Producto>();
 
+
     public Marca() {
     }
 
