@@ -16,7 +16,7 @@ public class TipoPrenda {
     private String nombre; // no vacio solo letras y espacios y longitud 80
 
     @OneToMany(mappedBy = "tipoPrenda")
-    @JsonManagedReference
+    @JsonManagedReference("tipoPrenda-producto")
     private List<Producto> productos=new ArrayList<Producto>();
 
     public TipoPrenda() {

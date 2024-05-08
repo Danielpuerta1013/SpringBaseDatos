@@ -25,7 +25,7 @@ public class Marca {
     private String sedePrincipal; // no se valida
 
     @OneToMany(mappedBy = "marca")
-    @JsonManagedReference
+    @JsonManagedReference("marca-producto")
     private List<Producto> productos=new ArrayList<Producto>();
 
     public Marca() {
